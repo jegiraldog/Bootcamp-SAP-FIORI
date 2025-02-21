@@ -6,11 +6,22 @@ sap.ui.define([
 
     return Controller.extend("com.bootcamp.sapui5.freestyle.controller.Home", {
         onInit() {
+            this.oRouter = this.getOwnerComponent().getRouter();
         },
 
         onPress: async function(){
             let oDatos = await HomeHelper.getProposalBystatus(); 
             await HomeHelper.setProductModel(this, oDatos[0].results);
+        },
+
+        onItemPress: function(oEvent){
+            let oSource = oEvent.getSource();
+
+            let oDatos = oSource.getBindingContext("ProductCollection").getObject();
+
+            this.oRouter.navTo("detail", {
+                ProductID: oDatos.ProductID
+            });
         }
     });
 });
