@@ -2,11 +2,15 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "com/bootcamp/sapui5/freestyle/utils/HomeHelper",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
-], (Controller, HomeHelper, Filter, FilterOperator) => {
+    "sap/ui/model/FilterOperator",
+    "com/bootcamp/sapui5/freestyle/model/formatter",
+], (Controller, HomeHelper, Filter, FilterOperator, formatter) => {
     "use strict";
 
     return Controller.extend("com.bootcamp.sapui5.freestyle.controller.Home", {
+
+        formatter: formatter,
+
         onInit() {
             this.oRouter = this.getOwnerComponent().getRouter();
         },

@@ -14,24 +14,31 @@
                 text="{i18n>textPruebai18n}"
             />
             <Toolbar id="toolbarID">
-                <Input id="inputID" change="onChange" value="{LocalDataModel>/valueInput}"/>
-            <ComboBox
-                id="comboboxID"
-                selectionChange="onSelectionChange"
-                selectedKey="{LocalDataModel>/selectedKey}"
-				items="{
+                <Input
+                    id="inputID"
+                    change="onChange"
+                    value="{LocalDataModel>/valueInput}"
+                />
+                <ComboBox
+                    id="comboboxID"
+                    selectionChange="onSelectionChange"
+                    selectedKey="{LocalDataModel>/selectedKey}"
+                    items="{
 					path: '/Categories',
 					sorter: { path: 'CategoryName' }
-				}">
-				<core:Item key="{CategoryID}" text="{CategoryName}" />                                     
-            </ComboBox>                
+				}"
+                >
+                    <core:Item
+                        key="{CategoryID}"
+                        text="{CategoryName}"
+                    />
+                </ComboBox>
                 <Button
                     id="btnBuscar"
                     text="{i18n>textBuscar}"
                     press="onPress"
-                />            
+                />
             </Toolbar>
-
         </VBox>
 
         <VBox id="vTest2">
@@ -40,7 +47,6 @@
                 growing="true"
                 growingThreshold="20"
                 growingScrollToLoad="true"
-
                 items="{
                     path: 'ProductCollection>/'
                 }"
@@ -56,6 +62,12 @@
                         <Text
                             id="ID_T05"
                             text="{i18n>UnitPrice}"
+                        />
+                    </Column>
+                    <Column id="ID_10">
+                        <Text
+                            id="ID_T08"
+                            text="{i18n>UnitPrice}_2"
                         />
                     </Column>
                     <Column id="ID_05">
@@ -90,8 +102,19 @@
                                     type: 'sap.ui.model.type.Currency',
                                     formatOptions: {showMeasure: true}
                                 }"
+                                state="{ path:'ProductCollection>UnitPrice', formatter: '.formatter.getStateUnit' }"
                                 unit="USD"
                             />
+                            <ObjectNumber
+                                id="ID_12"
+                                number="{
+                                    parts:[{path:'ProductCollection>UnitPrice'},{path:''}],
+                                    type: 'sap.ui.model.type.Currency',
+                                    formatOptions: {showMeasure: true}
+                                }"
+                                state="{= ${ProductCollection>UnitPrice} >= 50 ? 'Error': ${ProductCollection>UnitPrice} >= 10? 'Warning': 'Success'}"
+                                unit="USD"
+                            />                            
                             <Text
                                 id="ID_09"
                                 text="{ProductCollection>UnitsInStock}"
